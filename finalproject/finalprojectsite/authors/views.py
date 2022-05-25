@@ -1,24 +1,38 @@
 
-from multiprocessing import context
-from django.http import HttpResponse
+from re import template
+from gc import get_objects
 from django.template import loader
+from multiprocessing import context
 from django.shortcuts import render
+from django.http import HttpResponse
+
+from .models import Author, Award, Book
 
 
 
 
 
-def index(request):
-   
-    return HttpResponse("authors list")
+def index(request):   
+    index_list = 'Author', 'Award', 'Book'
+    template = loader.get_template('authors/index.html')
+    context = {'index_list': index_list}
+    return HttpResponse(template.render(context, request))
 
 def award(request):
-    response = "You're looking at the awards."
-    return HttpResponse(response )
+    award_list = Award.objects.all
+    template = loader.get_template('authors/award.html')
+    context = {'award_list':award_list}
+    return HttpResponse(template.render(context, request))
 
-def book(request, ):
-    return HttpResponse("You're looking at books.")
+def book(request):
+    book_list = Book.objects.all
+    template = loader.get_template('authors/book.html')
+    context = {'book_list':book_list}
+    return HttpResponse(template.render(context, request))
 
 
-def author(request, question_id):
-    return HttpResponse("You're looking at authors." )
+def author(request):
+    author_list = Author.objects.all
+    template = loader.get_template('authors/author.html')
+    context = {'author_list':author_list}
+    return HttpResponse(template.render(context, request))
