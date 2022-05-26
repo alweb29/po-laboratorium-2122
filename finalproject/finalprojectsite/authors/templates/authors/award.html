@@ -1,9 +1,10 @@
 {% if award_list %}
     <ul>
         {% for award in award_list%}
-            <li><a href="/authors/{{award.id}}">{{award.awardName_text}}</a></li>
+            <li><a href="/authors/award/{{award.id}}">{{award.awardName_text}}</a></li>
         {% endfor%}
     </ul>
 {% else %}
     <p> No awards aviable.</p>
 {% endif %}
+<a href="/authors/">Main Site</a>
